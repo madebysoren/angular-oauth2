@@ -25,6 +25,9 @@
                 if (!config.headers.hasOwnProperty("Authorization") && OAuthToken.getAuthorizationHeader()) {
                     config.headers.Authorization = OAuthToken.getAuthorizationHeader();
                 }
+                if (config.headers.hasOwnProperty("Authorization") && config.headers.Authorization.toLowerCase() === "none") {
+                    delete config.headers.Authorization;
+                }
                 return config;
             },
             responseError: function responseError(rejection) {
