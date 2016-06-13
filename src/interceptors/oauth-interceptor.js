@@ -7,16 +7,14 @@ function oauthInterceptor($q, $rootScope, OAuthToken) {
   return {
     request: function(config) {
       config.headers = config.headers || {};
-
       // Inject `Authorization` header.
-      if (!config.headers.hasOwnProperty('Authorization') && OAuthToken.getAuthorizationHeader()) {
+      if (!config.headers.hasOwnProperty('ignoreAuthorizationHeader') && !config.headers.hasOwnProperty('Authorization') && OAuthToken.getAuthorizationHeader()) {
         config.headers.Authorization = OAuthToken.getAuthorizationHeader();
+		return config;
       }
 	  
-	  if(config.headers.hasOwnProperty('Authorization') && config.headers.Authorization.toLowerCase() === 'none') {
-		  delete config.headers.Authorization;
-	  }
-
+	  config.headers.ignoreAuthorizationHeader = undefined;
+	  
       return config;
     },
     responseError: function(rejection) {
