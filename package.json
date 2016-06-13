@@ -2,7 +2,7 @@
   "name": "angular-oauth2-bypass",
   "version": "4.0.0",
   "description": "Angular OAuth2",
-  "main": "./dist/angular-oauth2.js",
+  "main": "./dist/angular-oauth2-bypass.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/madebysoren/angular-oauth2.git"
@@ -55,7 +55,7 @@
     "yargs": "^3.6.0"
   },
   "scripts": {
-    "changelog": "./node_modules/.bin/github-changes -o seegno -r angular-oauth2 -a --only-pulls --use-commit-body --title 'Changelog' --date-format '/ YYYY-MM-DD'",
+    "changelog": "./node_modules/.bin/github-changes -o seegno -r angular-oauth2-bypass -a --only-pulls --use-commit-body --title 'Changelog' --date-format '/ YYYY-MM-DD'",
     "test": "./node_modules/.bin/gulp test --browsers Firefox"
   }
 }

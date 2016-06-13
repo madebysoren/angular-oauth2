@@ -1,8 +1,8 @@
 {
-  "name": "angular-oauth2",
+  "name": "angular-oauth2-bypass",
   "version": "4.0.0",
   "description": "AngularJS OAuth2",
-  "main": "./dist/angular-oauth2.js",
+  "main": "./dist/angular-oauth2-bypass.js",
   "authors": [
     "Seegno <projects@seegno.com>"
   ],
@@ -12,7 +12,7 @@
     "OAuth2"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/seegno/angular-oauth2",
+  "homepage": "https://github.com/madebysoren/angular-oauth2",
   "ignore": [
     "**/.*",
     "bower_components",
