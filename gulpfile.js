@@ -19,8 +19,8 @@ var wrapUmd = require('gulp-wrap-umd');
  */
 
 var config = {
-  name: 'angular-oauth2.js',
-  entry: './src/angular-oauth2.js',
+  name: 'angular-oauth2-bypass.js',
+  entry: './src/angular-oauth2-bypass.js',
   src: ['./src/*.js', './src/**/*.js'],
   dest: './dist',
   umd: {

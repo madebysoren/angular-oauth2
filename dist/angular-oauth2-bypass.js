@@ -1,7 +1,7 @@
 /**
- * angular-oauth2 - Angular OAuth2
+ * angular-oauth2-bypass - Angular OAuth2
  * @version v4.0.0
- * @link https://github.com/seegno/angular-oauth2
+ * @link https://github.com/madebysoren/angular-oauth2
  * @license MIT
  */
 (function(root, factory) {
@@ -14,20 +14,15 @@
     }
 })(this, function(angular, ngCookies, queryString) {
     var ngModule = angular.module("angular-oauth2", [ ngCookies ]).config(oauthConfig).factory("oauthInterceptor", oauthInterceptor).provider("OAuth", OAuthProvider).provider("OAuthToken", OAuthTokenProvider);
-    function oauthConfig($httpProvider) {
-        $httpProvider.interceptors.push("oauthInterceptor");
-    }
-    oauthConfig.$inject = [ "$httpProvider" ];
     function oauthInterceptor($q, $rootScope, OAuthToken) {
         return {
             request: function request(config) {
                 config.headers = config.headers || {};
-                if (!config.headers.hasOwnProperty("Authorization") && OAuthToken.getAuthorizationHeader()) {
+                if (!config.headers.hasOwnProperty("ignoreAuthorizationHeader") && !config.headers.hasOwnProperty("Authorization") && OAuthToken.getAuthorizationHeader()) {
                     config.headers.Authorization = OAuthToken.getAuthorizationHeader();
+                    return config;
                 }
-                if (config.headers.hasOwnProperty("Authorization") && config.headers.Authorization.toLowerCase() === "none") {
-                    delete config.headers.Authorization;
-                }
+                config.headers.ignoreAuthorizationHeader = undefined;
                 return config;
             },
             responseError: function responseError(rejection) {
@@ -43,6 +38,10 @@
         };
     }
     oauthInterceptor.$inject = [ "$q", "$rootScope", "OAuthToken" ];
+    function oauthConfig($httpProvider) {
+        $httpProvider.interceptors.push("oauthInterceptor");
+    }
+    oauthConfig.$inject = [ "$httpProvider" ];
     var _createClass = function() {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
